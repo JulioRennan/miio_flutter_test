@@ -3,7 +3,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:miio_flutter_test/app/modules/home/presentation/controller/home_store.dart';
 import 'package:miio_flutter_test/app/modules/home/presentation/widgets/card_post.dart';
+import 'package:miio_flutter_test/app/modules/posts/presentation/pages/post_detail_page.dart';
 import 'package:miio_flutter_test/core/theme/app_colors.dart';
+import 'package:miio_flutter_test/main.dart';
 
 import '../widgets/chips_options.dart';
 
@@ -16,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final controller = Modular.get<HomeStore>();
+  final controller = getIt.get<HomeStore>();
 
   @override
   void initState() {
@@ -77,6 +79,16 @@ class _HomePageState extends State<HomePage> {
                         subtitle: post.text,
                         avatarUrl: post.avatarUrl,
                         backgroundUrl: post.backgroundUrl,
+                        onTap: () => Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            transitionDuration: const Duration(
+                              milliseconds: 500,
+                            ),
+                            pageBuilder: (context, _, __) =>
+                                PostDetailPage(post: post),
+                          ),
+                        ),
                       );
                     },
                   );

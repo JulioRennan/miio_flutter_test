@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:miio_flutter_test/app/modules/home/presentation/pages/home_page.dart';
 import 'package:miio_flutter_test/core/theme/app_theme.dart';
 
 class AppWidget extends StatelessWidget {
@@ -9,11 +9,10 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return MaterialApp(
       title: 'Flutter Slidy',
       theme: appTheme,
-      routerDelegate: Modular.routerDelegate,
-      routeInformationParser: Modular.routeInformationParser,
+      home: const HomePage(),
     );
   }
 }
