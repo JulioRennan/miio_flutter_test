@@ -7,15 +7,18 @@ class ChipsOptions extends StatelessWidget {
     required this.title,
     required this.isSelected,
     required this.onTap,
+    this.margin,
   });
   final bool isSelected;
   final String title;
   final void Function() onTap;
+  final EdgeInsetsGeometry? margin;
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: AnimatedContainer(
-        margin: const EdgeInsets.only(right: 10, left: 2),
+        margin: margin??const EdgeInsets.only(right: 10, left: 2),
         duration: const Duration(milliseconds: 300),
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(

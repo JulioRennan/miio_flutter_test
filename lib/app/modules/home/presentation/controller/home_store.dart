@@ -15,7 +15,7 @@ abstract class HomeStoreBase with Store {
   final GetPostsUsecase _getPostsUsecase;
   final categories = ['Teology', 'Art', 'Buy now', 'Overall'];
 
-  ObservableList<PostEntity> listPosts = <PostEntity>[].asObservable();
+  List<PostEntity> listPosts = <PostEntity>[];
 
   @observable
   String currentCategory = 'Teology';
