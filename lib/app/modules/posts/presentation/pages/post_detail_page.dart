@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:miio_flutter_test/app/domain/entities/post_entity.dart';
+import 'package:miio_flutter_test/core/widgets/animations/fade_container.dart';
+import 'package:miio_flutter_test/domain/entities/post_entity.dart';
 import 'package:miio_flutter_test/app/modules/home/presentation/widgets/card_user.dart';
 import 'package:miio_flutter_test/app/modules/posts/presentation/widgets/card_comment.dart';
 import 'package:miio_flutter_test/app/modules/posts/presentation/widgets/shadow_button.dart';
@@ -25,7 +26,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
       body: Stack(
         children: [
           Hero(
-            tag: "backgroundImage",
+            tag: widget.post.backgroundUrl,
             child: SizedBox(
               height: MediaQuery.of(context).size.height * .6,
               width: MediaQuery.of(context).size.width,
@@ -93,7 +94,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                       ),
                       const SizedBox(height: 24),
                       Hero(
-                        tag: "titlePost",
+                        tag: widget.post.avatarUrl,
                         child: Material(
                           color: Colors.transparent,
                           child: Text(
@@ -108,14 +109,16 @@ class _PostDetailPageState extends State<PostDetailPage> {
                         style: AppStyles.postText,
                       ),
                       const SizedBox(height: 24),
-                      CardUser(
-                        hideHeroTag: true,
-                        title: widget.post.title,
-                        subtitle: widget.post.text,
-                        avatarUrl: widget.post.avatarUrl,
-                        decoration: BoxDecoration(
-                          color: const Color(0xffF9FBFC),
-                          borderRadius: BorderRadius.circular(10),
+                      FadeContainer(
+                        child: CardUser(
+                          hideHeroTag: true,
+                          title: widget.post.title,
+                          subtitle: widget.post.text,
+                          avatarUrl: widget.post.avatarUrl,
+                          decoration: BoxDecoration(
+                            color: const Color(0xffF9FBFC),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 24),

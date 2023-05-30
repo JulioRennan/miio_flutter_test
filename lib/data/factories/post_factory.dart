@@ -1,11 +1,13 @@
-import 'package:miio_flutter_test/app/data/factories/category_factory.dart';
-import 'package:miio_flutter_test/app/data/factories/comment_factory.dart';
-import 'package:miio_flutter_test/app/domain/entities/post_entity.dart';
+import 'package:miio_flutter_test/data/factories/category_factory.dart';
+import 'package:miio_flutter_test/data/factories/comment_factory.dart';
+import 'package:miio_flutter_test/domain/entities/post_entity.dart';
 
 class PostFactory {
   static PostEntity fromMap(Map<String, dynamic> map) {
     return PostEntity(
       id: map['id'],
+      userName: map['user_name'],
+      userSubtitle: map['user_subtitle'],
       title: map['title'],
       avatarUrl: map['avatar_url'],
       backgroundUrl: map['background_url'],

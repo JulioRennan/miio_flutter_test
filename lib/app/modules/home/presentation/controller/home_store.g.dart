@@ -41,12 +41,36 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
-  late final _$getPostsAsyncAction =
-      AsyncAction('HomeStoreBase.getPosts', context: context);
+  late final _$isLoadingNextPageAtom =
+      Atom(name: 'HomeStoreBase.isLoadingNextPage', context: context);
 
   @override
-  Future<void> getPosts() {
-    return _$getPostsAsyncAction.run(() => super.getPosts());
+  bool get isLoadingNextPage {
+    _$isLoadingNextPageAtom.reportRead();
+    return super.isLoadingNextPage;
+  }
+
+  @override
+  set isLoadingNextPage(bool value) {
+    _$isLoadingNextPageAtom.reportWrite(value, super.isLoadingNextPage, () {
+      super.isLoadingNextPage = value;
+    });
+  }
+
+  late final _$_getPostsAsyncAction =
+      AsyncAction('HomeStoreBase._getPosts', context: context);
+
+  @override
+  Future<void> _getPosts() {
+    return _$_getPostsAsyncAction.run(() => super._getPosts());
+  }
+
+  late final _$nextPageAsyncAction =
+      AsyncAction('HomeStoreBase.nextPage', context: context);
+
+  @override
+  Future nextPage() {
+    return _$nextPageAsyncAction.run(() => super.nextPage());
   }
 
   late final _$HomeStoreBaseActionController =
@@ -67,7 +91,8 @@ mixin _$HomeStore on HomeStoreBase, Store {
   String toString() {
     return '''
 currentCategory: ${currentCategory},
-isLoadingHomePage: ${isLoadingHomePage}
+isLoadingHomePage: ${isLoadingHomePage},
+isLoadingNextPage: ${isLoadingNextPage}
     ''';
   }
 }

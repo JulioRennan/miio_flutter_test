@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:miio_flutter_test/app/domain/entities/comment.dart';
+import 'package:miio_flutter_test/domain/entities/comment.dart';
 import 'package:miio_flutter_test/app/modules/posts/presentation/widgets/stars_comments.dart';
 
 import '../../../../../core/theme/app_colors.dart';

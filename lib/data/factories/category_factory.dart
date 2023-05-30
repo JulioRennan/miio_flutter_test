@@ -1,4 +1,4 @@
-import 'package:miio_flutter_test/app/domain/entities/category_entity.dart';
+import 'package:miio_flutter_test/domain/entities/category_entity.dart';
 
 class CategoryFactory {
   static CategoryEntity fromMap(Map<String, dynamic> map) {

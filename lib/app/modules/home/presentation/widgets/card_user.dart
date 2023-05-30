@@ -45,9 +45,11 @@ class CardUser extends StatelessWidget {
           const SizedBox(width: 16),
           Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Hero(
-                  tag: hideHeroTag ? "" : "titlePost",
+                  tag: hideHeroTag ? DateTime.now().toString() : avatarUrl,
                   child: Material(
                     color: Colors.transparent,
                     child: Text(

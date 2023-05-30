@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:miio_flutter_test/app/modules/home/presentation/widgets/card_user.dart';
+import 'package:miio_flutter_test/core/widgets/animations/fade_container.dart';
+import 'package:skeletons/skeletons.dart';
 
 class CardPost extends StatelessWidget {
   const CardPost({
@@ -25,7 +27,7 @@ class CardPost extends StatelessWidget {
         child: Stack(
           children: [
             Hero(
-              tag: "backgroundImage",
+              tag: backgroundUrl,
               child: Container(
                 height: 220,
                 clipBehavior: Clip.antiAlias,
@@ -35,6 +37,17 @@ class CardPost extends StatelessWidget {
                     fit: BoxFit.cover,
                     image: NetworkImage(backgroundUrl),
                   ),
+                ),
+                child: Image.network(
+                  backgroundUrl,
+                  loadingBuilder: (context, child, progress) {
+                    if (progress != null) {
+                      return const SkeletonAvatar(
+                        style: SkeletonAvatarStyle(width: double.infinity),
+                      );
+                    }
+                    return Center(child: child);
+                  },
                 ),
               ),
             ),

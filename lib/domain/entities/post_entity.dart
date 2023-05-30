@@ -3,6 +3,8 @@ import 'comment.dart';
 
 class PostEntity {
   final int id;
+  final String userName;
+  final String userSubtitle;
   final String title;
   final String avatarUrl;
   final String backgroundUrl;
@@ -11,6 +13,7 @@ class PostEntity {
   final bool isFeatured;
   final CategoryEntity category;
   final List<CommentEntity> comments;
+
   const PostEntity({
     required this.id,
     required this.title,
@@ -21,5 +24,7 @@ class PostEntity {
     required this.isFeatured,
     required this.category,
     required this.comments,
+    required this.userName,
+    required this.userSubtitle,
   });
 }
