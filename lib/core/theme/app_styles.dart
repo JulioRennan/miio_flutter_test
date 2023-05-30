@@ -7,4 +7,9 @@ class AppStyles {
     fontWeight: FontWeight.w500,
     color: AppColors.lightGray,
   );
+  static const cardTitle = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    color: AppColors.black,
+  );
 }
