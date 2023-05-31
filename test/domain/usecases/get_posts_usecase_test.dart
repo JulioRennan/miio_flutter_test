@@ -1,28 +1,26 @@
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:miio_flutter_test/core/adapters/network_adapter/errors/network_errors.dart';
-import 'package:miio_flutter_test/data/datasources/post_datasource.dart';
-import 'package:miio_flutter_test/data/repositories/post_repository_impl.dart';
+import 'package:miio_flutter_test/data/factories/post_factory.dart';
 import 'package:miio_flutter_test/domain/entities/post_entity.dart';
 import 'package:miio_flutter_test/domain/errors/failure.dart';
 import 'package:miio_flutter_test/domain/params/get_post_params.dart';
 import 'package:miio_flutter_test/domain/repositories/post_repository.dart';
+import 'package:miio_flutter_test/domain/usecases/get_posts_usecase.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../mocks/search_posts_response.dart';
+import '../../data/mocks/search_posts_response.dart';
 
-class MockPostDatasource extends Mock implements PostDatasource {}
+class MockPostRepository extends Mock implements PostRepository {}
 
 void main() {
-  late final PostDatasource datasource;
   late final PostRepository repository;
+  late final GetPostsUsecase usecase;
   setUpAll(
     () {
-      datasource = MockPostDatasource();
-      repository = PostRepositoryImpl(datasource: datasource);
-      registerFallbackValue(
-        GetPostsParams(page: 0, searchText: ''),
-      );
+      repository = MockPostRepository();
+      usecase = GetPostsUsecase(repository: repository);
+      registerFallbackValue(GetPostsParams(page: 0, searchText: ''));
     },
   );
   group(
@@ -31,11 +29,15 @@ void main() {
       test(
         "Should be return a list of posts with success",
         () async {
-          when(() => datasource.getPosts(params: any(named: 'params')))
+          when(() => repository.getPosts(params: any(named: 'params')))
               .thenAnswer(
-            (invocation) async => searchPostsJSON,
+            (invocation) async => Right(
+              List.from(searchPostsJSON)
+                  .map((e) => PostFactory.fromMap(e))
+                  .toList(),
+            ),
           );
-          final result = await repository.getPosts(
+          final result = await usecase(
             params: GetPostsParams(searchText: "", page: 0),
           );
           expect(result, isA<Right<Failure, List<PostEntity>>>());
@@ -45,8 +47,8 @@ void main() {
       test(
         "Should be return a NetworkNoConnectionError",
         () async {
-          when(() => datasource.getPosts(params: any(named: 'params')))
-              .thenThrow(NetworkNoConnectionError());
+          when(() => repository.getPosts(params: any(named: 'params')))
+              .thenAnswer((_) async => Left(NetworkNoConnectionError()));
           final result = await repository.getPosts(
             params: GetPostsParams(searchText: "", page: 0),
           );
@@ -57,8 +59,8 @@ void main() {
       test(
         "Should be return a NetworkInternalServerError",
         () async {
-          when(() => datasource.getPosts(params: any(named: 'params')))
-              .thenThrow(NetworkInternalServerError());
+          when(() => repository.getPosts(params: any(named: 'params')))
+              .thenAnswer((_) async => Left(NetworkInternalServerError()));
           final result = await repository.getPosts(
             params: GetPostsParams(searchText: "", page: 0),
           );
@@ -69,8 +71,8 @@ void main() {
       test(
         "Should be return a NetworkNotAvaiable",
         () async {
-          when(() => datasource.getPosts(params: any(named: 'params')))
-              .thenThrow(NetworkNotAvaiable());
+          when(() => repository.getPosts(params: any(named: 'params')))
+              .thenAnswer((_) async => Left(NetworkNotAvaiable()));
           final result = await repository.getPosts(
             params: GetPostsParams(searchText: "", page: 0),
           );
@@ -81,8 +83,10 @@ void main() {
       test(
         "Should be return a NetworkResponseError",
         () async {
-          when(() => datasource.getPosts(params: any(named: 'params')))
-              .thenThrow(NetworkResponseError(data: {},statusCode: 400));
+          when(() => repository.getPosts(params: any(named: 'params')))
+              .thenAnswer((_) async =>
+                  Left(NetworkResponseError(data: {}, statusCode: 400)));
+
           final result = await repository.getPosts(
             params: GetPostsParams(searchText: "", page: 0),
           );

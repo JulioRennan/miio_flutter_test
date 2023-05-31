@@ -22,7 +22,7 @@ void main() {
     "Testing search posts by text (getPosts)",
     () {
       test(
-        "Should be return a list of posts with sucess",
+        "Should be return a list of posts with success",
         () async {
           when(
             () => adapter.get(any(), query: any(named: "query")),
