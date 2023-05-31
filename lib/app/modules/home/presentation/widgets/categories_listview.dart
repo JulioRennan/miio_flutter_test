@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:miio_flutter_test/app/modules/home/presentation/controller/home_store.dart';
 
 import 'chips_options.dart';
@@ -18,13 +19,18 @@ class CategoriesListView extends StatelessWidget {
         itemCount: controller.categories.length,
         itemBuilder: (context, index) {
           final category = controller.categories[index];
-          return ChipsOptions(
-            margin:
-                index == 0 ? const EdgeInsets.only(right: 10, left: 24) : null,
-            title: category,
-            isSelected: controller.currentCategory == category,
-            onTap: () {
-              controller.setCategory(category);
+          return Observer(
+            builder: (context) {
+              return ChipsOptions(
+                margin: index == 0
+                    ? const EdgeInsets.only(right: 10, left: 24)
+                    : null,
+                title: category,
+                isSelected: controller.currentCategory == category,
+                onTap: () {
+                  controller.setCategory(category);
+                },
+              );
             },
           );
         },
