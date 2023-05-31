@@ -13,7 +13,6 @@ class CardComment extends StatelessWidget {
   final CommentEntity comment;
   @override
   Widget build(BuildContext context) {
-    print("Buidando ${DateTime.now()}");
     return Container(
       margin: const EdgeInsets.only(top: 10),
       padding: const EdgeInsets.all(20),

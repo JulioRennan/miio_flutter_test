@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:miio_flutter_test/app/modules/home/presentation/controller/home_store.dart';
 
 import 'chips_options.dart';

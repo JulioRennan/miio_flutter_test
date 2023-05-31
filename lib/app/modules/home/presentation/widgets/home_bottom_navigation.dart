@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:miio_flutter_test/app/modules/home/presentation/widgets/home_bottom_item.dart';

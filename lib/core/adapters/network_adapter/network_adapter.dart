@@ -8,7 +8,7 @@ import 'package:miio_flutter_test/core/config/constants.dart';
 class NetworkAdapter extends Interceptor {
   static bool hasDialogNoConnection = false;
   final bool debugRequest = true;
-  final bool debugReponse = false;
+  final bool debugReponse = true;
 
   late final _dio = Dio();
   final String baseUrl;

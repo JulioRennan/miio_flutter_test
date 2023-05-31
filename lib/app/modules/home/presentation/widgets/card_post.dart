@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:miio_flutter_test/app/modules/home/presentation/widgets/card_user.dart';
-import 'package:miio_flutter_test/core/widgets/animations/fade_container.dart';
 import 'package:skeletons/skeletons.dart';
 
 class CardPost extends StatelessWidget {
