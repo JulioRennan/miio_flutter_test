@@ -1,4 +1,5 @@
 import 'package:either_dart/either.dart';
+import 'package:miio_flutter_test/domain/errors/failure.dart';
 import 'package:miio_flutter_test/domain/repositories/post_repository.dart';
 
 import '../entities/post_entity.dart';
@@ -11,7 +12,7 @@ class GetPostsUsecase {
     required PostRepository repository,
   }) : _repository = repository;
 
-  Future<Either<Error, List<PostEntity>>> call({
+  Future<Either<Failure, List<PostEntity>>> call({
     required GetPostsParams params,
   }) =>
       _repository.getPosts(params: params);

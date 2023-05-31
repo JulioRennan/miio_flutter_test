@@ -3,6 +3,7 @@ import 'package:miio_flutter_test/core/adapters/network_adapter/errors/network_e
 import 'package:miio_flutter_test/data/datasources/post_datasource.dart';
 import 'package:miio_flutter_test/data/factories/post_factory.dart';
 import 'package:miio_flutter_test/domain/entities/post_entity.dart';
+import 'package:miio_flutter_test/domain/errors/failure.dart';
 import 'package:miio_flutter_test/domain/params/get_post_params.dart';
 import 'package:miio_flutter_test/domain/repositories/post_repository.dart';
 
@@ -11,7 +12,7 @@ class PostRepositoryImpl implements PostRepository {
       : _datasource = datasource;
   final PostDatasource _datasource;
   @override
-  Future<Either<Error, List<PostEntity>>> getPosts({
+  Future<Either<Failure, List<PostEntity>>> getPosts({
     required GetPostsParams params,
   }) async {
     try {

@@ -4,8 +4,7 @@ import 'package:miio_flutter_test/app/modules/home/presentation/widgets/actions_
 import 'package:miio_flutter_test/app/modules/home/presentation/widgets/body_list_posts.dart';
 import 'package:miio_flutter_test/core/theme/app_colors.dart';
 import 'package:miio_flutter_test/core/widgets/animations/fade_container.dart';
-import 'package:miio_flutter_test/main.dart';
-
+import '../../../app_injection_container.dart';
 import '../widgets/home_bottom_navigation.dart';
 
 class HomePage extends StatefulWidget {
