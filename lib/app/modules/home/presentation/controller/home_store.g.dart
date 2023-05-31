@@ -41,6 +41,22 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
+  late final _$hasErrorAtom =
+      Atom(name: 'HomeStoreBase.hasError', context: context);
+
+  @override
+  bool get hasError {
+    _$hasErrorAtom.reportRead();
+    return super.hasError;
+  }
+
+  @override
+  set hasError(bool value) {
+    _$hasErrorAtom.reportWrite(value, super.hasError, () {
+      super.hasError = value;
+    });
+  }
+
   late final _$isLoadingNextPageAtom =
       Atom(name: 'HomeStoreBase.isLoadingNextPage', context: context);
 
@@ -92,6 +108,7 @@ mixin _$HomeStore on HomeStoreBase, Store {
     return '''
 currentCategory: ${currentCategory},
 isLoadingHomePage: ${isLoadingHomePage},
+hasError: ${hasError},
 isLoadingNextPage: ${isLoadingNextPage}
     ''';
   }

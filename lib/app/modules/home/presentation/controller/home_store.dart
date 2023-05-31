@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:miio_flutter_test/domain/entities/post_entity.dart';
 import 'package:miio_flutter_test/domain/params/get_post_params.dart';
 import 'package:miio_flutter_test/domain/usecases/get_posts_usecase.dart';
@@ -13,15 +15,23 @@ abstract class HomeStoreBase with Store {
   }) : _getPostsUsecase = getPostsUsecase;
 
   final GetPostsUsecase _getPostsUsecase;
-  final categories = ['Teology', 'Art', 'Buy now', 'Overall'];
 
+  final categories = ['Teology', 'Art', 'Buy now', 'Overall'];
   List<PostEntity> listPosts = <PostEntity>[];
+  String currentSearch = '';
+  int currentPage = 0;
+  bool hasMore = true;
 
   @observable
   String currentCategory = 'Teology';
-
   @observable
   bool isLoadingHomePage = false;
+  @observable
+  bool hasError = false;
+  @observable
+  bool isLoadingNextPage = false;
+
+  setCurrentSearch(String value) => currentSearch = value;
 
   @action
   setCategory(String category) {
@@ -30,17 +40,9 @@ abstract class HomeStoreBase with Store {
     getInitialPosts();
   }
 
-  String currentSearch = '';
-  int currentPage = 0;
-  bool hasMore = true;
-
-  setCurrentSearch(String value) => currentSearch = value;
-
-  @observable
-  bool isLoadingNextPage = false;
-
   @action
   Future<void> _getPosts() async {
+    hasError = false;
     final result = await _getPostsUsecase(
       params: GetPostsParams(
         searchText: currentSearch,
@@ -48,7 +50,10 @@ abstract class HomeStoreBase with Store {
       ),
     );
     result.fold(
-      (left) => null,
+      (error) {
+        log(error.toString());
+        hasError = true;
+      },
       (resultPosts) {
         if (resultPosts.length < 3) hasMore = false;
         listPosts.addAll(resultPosts);

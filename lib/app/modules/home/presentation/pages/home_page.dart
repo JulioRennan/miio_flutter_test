@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:miio_flutter_test/app/modules/home/presentation/controller/home_store.dart';
+import 'package:miio_flutter_test/app/modules/home/presentation/widgets/actions_list_posts.dart';
 import 'package:miio_flutter_test/app/modules/home/presentation/widgets/body_list_posts.dart';
-import 'package:miio_flutter_test/app/modules/posts/presentation/widgets/actions_buttons_post_detail.dart';
 import 'package:miio_flutter_test/core/theme/app_colors.dart';
 import 'package:miio_flutter_test/core/widgets/animations/fade_container.dart';
 import 'package:miio_flutter_test/main.dart';
@@ -44,7 +44,7 @@ class HomePageState extends State<HomePage> {
           child: CustomScrollView(
             controller: scrollController,
             slivers: [
-              const SliverAppBar(
+              SliverAppBar(
                 toolbarHeight: 170,
                 expandedHeight: 170,
                 backgroundColor: AppColors.background,
@@ -53,9 +53,9 @@ class HomePageState extends State<HomePage> {
                 floating: true,
                 pinned: false,
                 flexibleSpace: Padding(
-                  padding: EdgeInsets.only(top: 24),
+                  padding: const EdgeInsets.only(top: 24),
                   child: FadeContainer(
-                    child: ActionsButtonsPostDetail(),
+                    child: ActionsListPost(controller: controller),
                   ),
                 ),
               ),

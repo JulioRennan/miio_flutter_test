@@ -5,14 +5,12 @@ import 'package:dio/dio.dart';
 
 import '../errors/network_errors.dart';
 
-class ErrorInterceptor extends Interceptor {
-  @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
-    _errorHandler(dioError: err);
-    super.onError(err, handler);
-  }
+class ErrorHandler {
+  ErrorHandler._();
 
-  DioError _errorHandler({required DioError dioError}) {
+  static call(DioError dioError) => _errorHandler(dioError: dioError);
+
+  static DioError _errorHandler({required DioError dioError}) {
     if (dioError.error is SocketException ||
         DioErrorType.connectionTimeout == dioError.type ||
         DioErrorType.receiveTimeout == dioError.type) {
@@ -35,7 +33,7 @@ class ErrorInterceptor extends Interceptor {
     }
   }
 
-  void _showErrorInfo(DioError dioError) {
+  static void _showErrorInfo(DioError dioError) {
     var response = dioError.response!;
     log('error --> ${dioError.error}');
     log('erro na rota --> ${dioError.requestOptions.path}');
