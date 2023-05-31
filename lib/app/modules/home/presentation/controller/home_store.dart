@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:miio_flutter_test/domain/entities/post_entity.dart';
 import 'package:miio_flutter_test/domain/params/get_post_params.dart';
 import 'package:miio_flutter_test/domain/usecases/get_posts_usecase.dart';
@@ -15,10 +16,10 @@ abstract class HomeStoreBase with Store {
   }) : _getPostsUsecase = getPostsUsecase;
 
   final GetPostsUsecase _getPostsUsecase;
+  final searchController = TextEditingController();
 
   final categories = ['Teology', 'Art', 'Buy now', 'Overall'];
   List<PostEntity> listPosts = <PostEntity>[];
-  String currentSearch = '';
   int currentPage = 0;
   bool hasMore = true;
 
@@ -31,7 +32,7 @@ abstract class HomeStoreBase with Store {
   @observable
   bool isLoadingNextPage = false;
 
-  setCurrentSearch(String value) => currentSearch = value;
+  String get currentSearch => searchController.text;
 
   @action
   setCategory(String category) {
@@ -61,6 +62,8 @@ abstract class HomeStoreBase with Store {
     );
   }
 
+  clearTextSearch() => searchController.clear();
+  
   getInitialPosts() async {
     isLoadingHomePage = true;
     listPosts.clear();

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:miio_flutter_test/app/modules/home/presentation/controller/home_store.dart';
 import 'package:miio_flutter_test/app/modules/home/presentation/widgets/card_connection_error.dart';
+import 'package:miio_flutter_test/app/modules/home/presentation/widgets/card_list_empty.dart';
 
 import '../../../posts/presentation/pages/post_detail_page.dart';
 import 'card_post.dart';
@@ -27,7 +28,16 @@ class BodyListPosts extends StatelessWidget {
           builder: (context) {
             if (controller.isLoadingHomePage) {
               return const SliverFillRemaining(
-                child: Center(child: CircularProgressIndicator()),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+            if (controller.listPosts.isEmpty) {
+              return SliverFillRemaining(
+                child: Center(
+                  child: CardListEmpty(controller: controller),
+                ),
               );
             }
             return SliverPadding(

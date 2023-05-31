@@ -16,9 +16,9 @@ class ActionsListPost extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: TextField(
+            controller: controller.searchController,
             decoration: const InputDecoration(labelText: "Search"),
             onSubmitted: (newValue) {
-              controller.setCurrentSearch(newValue);
               controller.getInitialPosts();
             },
           ),
