@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:miio_flutter_test/domain/entities/post_entity.dart';
 import 'package:miio_flutter_test/domain/params/get_post_params.dart';
@@ -35,10 +33,10 @@ abstract class HomeStoreBase with Store {
   String get currentSearch => searchController.text;
 
   @action
-  setCategory(String category) {
+  Future<void> setCategory(String category) async {
     if (category == currentCategory) return;
     currentCategory = category;
-    getInitialPosts();
+    await getInitialPosts();
   }
 
   @action
@@ -52,7 +50,6 @@ abstract class HomeStoreBase with Store {
     );
     result.fold(
       (error) {
-        log(error.toString());
         hasError = true;
       },
       (resultPosts) {
@@ -63,8 +60,8 @@ abstract class HomeStoreBase with Store {
   }
 
   clearTextSearch() => searchController.clear();
-  
-  getInitialPosts() async {
+
+  Future<void> getInitialPosts() async {
     isLoadingHomePage = true;
     listPosts.clear();
     currentPage = 0;

@@ -73,6 +73,14 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
+  late final _$setCategoryAsyncAction =
+      AsyncAction('HomeStoreBase.setCategory', context: context);
+
+  @override
+  Future<void> setCategory(String category) {
+    return _$setCategoryAsyncAction.run(() => super.setCategory(category));
+  }
+
   late final _$_getPostsAsyncAction =
       AsyncAction('HomeStoreBase._getPosts', context: context);
 
@@ -87,20 +95,6 @@ mixin _$HomeStore on HomeStoreBase, Store {
   @override
   Future nextPage() {
     return _$nextPageAsyncAction.run(() => super.nextPage());
-  }
-
-  late final _$HomeStoreBaseActionController =
-      ActionController(name: 'HomeStoreBase', context: context);
-
-  @override
-  dynamic setCategory(String category) {
-    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
-        name: 'HomeStoreBase.setCategory');
-    try {
-      return super.setCategory(category);
-    } finally {
-      _$HomeStoreBaseActionController.endAction(_$actionInfo);
-    }
   }
 
   @override
