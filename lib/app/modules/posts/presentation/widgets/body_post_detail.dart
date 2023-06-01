@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miio_flutter_test/core/managers/manager_icons.dart';
 import 'package:miio_flutter_test/domain/entities/post_entity.dart';
 
 import '../../../../../core/theme/app_colors.dart';
@@ -6,6 +7,7 @@ import '../../../../../core/theme/app_styles.dart';
 import '../../../../../core/widgets/animations/fade_container.dart';
 import '../../../home/presentation/widgets/card_user.dart';
 import 'card_comment.dart';
+import 'section_actions.dart';
 
 class BodPostDetail extends StatefulWidget {
   const BodPostDetail({
@@ -53,6 +55,30 @@ class _BodPostDetailState extends State<BodPostDetail> {
                 style: AppStyles.postTitle,
               ),
             ),
+          ),
+          const SizedBox(height: 24),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: const SectionAction(
+                  pathAsset: ManagerIcons.iconText,
+                  title: "61 W X 41.3 H ",
+                ),
+              ),
+              Expanded(
+                child: SectionAction(
+                  pathAsset: ManagerIcons.iconOil,
+                  title: widget.post.category.name,
+                ),
+              ),
+              Expanded(
+                child: SectionAction(
+                  pathAsset: ManagerIcons.iconCountry,
+                  title: widget.post.language,
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 24),
           Text(

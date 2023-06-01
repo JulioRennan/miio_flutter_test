@@ -12,6 +12,16 @@ class AppStyles {
     fontWeight: FontWeight.bold,
     color: AppColors.black,
   );
+  static const flagTitle = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+    color: AppColors.white,
+  );
+  static const sectionActions = TextStyle(
+    fontSize: 11.19,
+    fontWeight: FontWeight.w500,
+    color: AppColors.darkGray,
+  );
   static const postTitle = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
@@ -20,7 +30,7 @@ class AppStyles {
   static const postText = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w500,
-    color: Color(0xffA9A9A9),
+    color: AppColors.darkGray,
   );
 
   static const sectionTitle = TextStyle(
@@ -36,6 +46,6 @@ class AppStyles {
   static const cardSectionSubtitle = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w500,
-    color: Color(0xffA9A9A9),
+    color: AppColors.darkGray,
   );
 }

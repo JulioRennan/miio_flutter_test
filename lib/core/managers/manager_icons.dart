@@ -7,4 +7,7 @@ class ManagerIcons {
   static const iconHome = "$_baseAsset/icons_home.png";
   static const iconShop = "$_baseAsset/icons_shop.png";
   static const iconAccount = "$_baseAsset/icons_account.png";
+  static const iconOil = "$_baseAsset/icons_oil.png";
+  static const iconCountry = "$_baseAsset/icons_country.png";
+  static const iconText = "$_baseAsset/icons_text.png";
 }
