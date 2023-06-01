@@ -8,7 +8,11 @@ import '../../../home/presentation/widgets/card_user.dart';
 import 'card_comment.dart';
 
 class BodPostDetail extends StatefulWidget {
-  const BodPostDetail({super.key,required this.post,required this.scrollController,});
+  const BodPostDetail({
+    super.key,
+    required this.post,
+    required this.scrollController,
+  });
   final PostEntity post;
   final ScrollController scrollController;
 
@@ -19,13 +23,14 @@ class BodPostDetail extends StatefulWidget {
 class _BodPostDetailState extends State<BodPostDetail> {
   @override
   Widget build(BuildContext context) {
-     return Container(
+    return Container(
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(30),
       ),
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       child: ListView(
+        padding: EdgeInsets.zero,
         controller: widget.scrollController,
         children: [
           Center(
